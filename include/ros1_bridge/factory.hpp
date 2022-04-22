@@ -198,9 +198,12 @@ protected:
       return;
     }
 
-    std::string key = "callerid";
+    const std::string key = "callerid";
+    const std::string node_name = "/ros_bridge";
+
     if (connection_header->find(key) != connection_header->end()) {
-      if (connection_header->at(key) == "/ros_bridge") {
+      const std::string callerid = connection_header->at(key);
+      if ( callerid.compare(callerid.size() - node_name.size() ,node_name.size(),node_name) == 0) {
         return;
       }
     }
